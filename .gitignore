@@ -9,7 +9,8 @@ env/
 lib/
 
 # Node.js dependencies
-node_modules
+node_modules/
+
 
 # Moondream model files
 *.mf
@@ -19,7 +20,6 @@ node_modules
 # Flask instance and logs
 instance/
 *.log
-
 
 # Environment variables
 .env
