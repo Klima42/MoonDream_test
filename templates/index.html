@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moondream Image Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #loading {
+            display: none;
+            font-size: 18px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Moondream Image Analyzer</h1>
+    <form id="imageForm">
+        <label for="image">Upload an Image:</label>
+        <input type="file" name="image" id="image" accept="image/*" required>
+        <button type="submit">Analyze</button>
+    </form>
+    <div id="loading">Processing the image, please wait...</div>
+    <div id="result"></div>
+
+    <script>
+        const form = document.getElementById("imageForm");
+        const loadingDiv = document.getElementById("loading");
+        const resultDiv = document.getElementById("result");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault(); // Prevent default form submission
+            console.log("Form submitted"); // Debug log
+
+            resultDiv.innerHTML = ""; // Clear previous results
+            loadingDiv.style.display = "block"; // Show loading message
+
+            const formData = new FormData(form);
+
+            try {
+                console.log("Sending request to server..."); // Debug log
+                const response = await fetch("/process-image", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                console.log("Response received"); // Debug log
+                const data = await response.json();
+
+                loadingDiv.style.display = "none"; // Hide loading message
+
+                if (data.error) {
+                    console.error("Server returned an error:", data.error); // Debug log
+                    resultDiv.innerHTML = `<span style="color: red;">Error: ${data.error}</span>`;
+                } else {
+                    console.log("Success:", data); // Debug log
+                    resultDiv.innerHTML = `
+                        <p><strong>Caption:</strong> ${data.caption}</p>
+                        <p><strong>Answer:</strong> ${data.answer}</p>
+                    `;
+                }
+            } catch (error) {
+                console.error("An error occurred:", error); // Debug log
+                loadingDiv.style.display = "none";
+                resultDiv.innerHTML = `<span style="color: red;">An error occurred: ${error.message}</span>`;
+            }
+        });
+    </script>
+</body>
+</html>

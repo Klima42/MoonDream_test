@@ -1,0 +1,9 @@
+{
+  "name": "moondream_project",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "testMoondream.js",
+  "dependencies": {
+    "moondream": "^latest"
+  }
+}

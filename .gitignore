@@ -1,0 +1,42 @@
+# Byte-compiled Python files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment and dependency directories
+venv/
+env/
+lib/
+
+# Node.js dependencies
+node_modules/
+
+# Moondream model files
+*.mf
+*.pt
+*.onnx
+
+# Flask instance and logs
+instance/
+*.log
+
+# Environment variables
+.env
+*.env
+
+# IDE and editor-specific files
+.vscode/
+.idea/
+*.swp
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.backup
+
+# User-uploaded files (optional)
+uploads/
